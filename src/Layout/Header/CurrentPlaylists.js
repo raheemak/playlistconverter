@@ -25,8 +25,7 @@ export default function CheckboxListSecondary() {
   };
 
   const playlistContext = React.useContext (PlaylistContext)
-
-  console.log (playlistContext.playlists)
+  
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {playlistContext.playlists.map((value) => {
@@ -48,10 +47,10 @@ export default function CheckboxListSecondary() {
               <ListItemAvatar>
                 <Avatar
                   alt={`Avatar n°${value + 1}`}
-                  src={`/static/images/avatar/${value + 1}.jpg`}
+                  src={value.image}
                 />
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={value.name} />
             </ListItemButton>
           </ListItem>
         );
