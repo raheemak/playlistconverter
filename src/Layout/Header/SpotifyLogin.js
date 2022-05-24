@@ -69,12 +69,12 @@ const SpotifyLogin = () => {
                 {!token ? <Button variant="contained" color="success" >
                     <a className="link" href={`${CONFIG.AUTH_ENDPOINT}?client_id=${CONFIG.CLIENT_ID}&redirect_uri=${CONFIG.REDIRECT_URI}&response_type=${CONFIG.RESPONSE_TYPE}`}>Login
                         to Spotify</a></Button>
-                    : <div><Button variant="contained" color="success" onClick={logout}> Logout</Button>  <Button onClick={handleGetPlaylists}>Get Playlists</Button>
+                    : <div><Button variant="contained" color="success" onClick={logout}> Logout</Button>  <Button onClick={handleGetPlaylists}>Get Playlists</Button>  <div className="center">
+                    {playlistContext.playlists.length>0 && <CheckboxListSecondary/>}
+                </div>
                         </div>}
             </div>
-        <div>
-            {playlistContext.playlists.length>0 && <CheckboxListSecondary/>}
-        </div>
+      
         </div>
     )
 }
