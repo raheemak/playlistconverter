@@ -4,6 +4,7 @@ const defaultPlaylistState = {playlist_link: "", playlist_type:""}
 
 const playlistReducer = (state ,action)=>{
     if (action.type === "UPDATE"){
+        console.log ("in here...")
         return {
             playlist_link: action.playlist.playlist_link, 
             playlist_type: action.playlist.playlist_type
@@ -16,8 +17,8 @@ const PlaylistProvider = (props)=>{
     const [playlistState, dispatchPlaylistAction] = useReducer(playlistReducer, defaultPlaylistState);
     
     const addPlaylistHandler = (playlist) =>{
-        console.log ("here!")
         dispatchPlaylistAction ({type: "UPDATE", playlist})
+        console.log(playlist)
     }
 
     const playlistContext = {

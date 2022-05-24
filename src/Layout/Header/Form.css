@@ -74,3 +74,7 @@ color: #808080;
 #option-2:checked:checked ~ .option-2 span{
 color: #fff;
 }
+
+.errorLabel{
+    color:red
+}

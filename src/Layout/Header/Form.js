@@ -7,6 +7,7 @@ const Container = () => {
     const [showErrorMessage, setShowErrorMessage] = useState (false )
     const [playlist_link, updatePlaylistLink]= useState(); 
     const [playlist_type, updatePlaylistType] = useState(); 
+    const [submitPossible, setSubmitPossible] = useState(false); 
 
     const playlistContext = useContext (PlaylistContext)
     
@@ -16,9 +17,21 @@ const Container = () => {
 
     const playlistTypeChangeHandler = (event)=>{
         updatePlaylistType(event.target.value)
+        if (!showErrorMessage)
+            setSubmitPossible (true)
     }
 
     const playlistLinkHandler = (event)=>{
+        if (event.target.value.trim()===""){
+            setShowErrorMessage (true)
+            setSubmitPossible (false)
+            return; 
+        }
+        console.log (playlist_type)
+        if (playlist_type)
+            setSubmitPossible (true)
+
+        setShowErrorMessage(false)
         updatePlaylistLink(event.target.value)
 
     }
@@ -27,12 +40,12 @@ const Container = () => {
             <form>
                 <div>
                 {!showErrorMessage && <label>Enter playlist link below</label>}
-                {showErrorMessage && <label>Enter valid playlist link below</label>}
+                {showErrorMessage && <label className="errorLabel">Enter valid playlist link below</label>}
                 </div>
                 <div> <input type="text" onChange={playlistLinkHandler}/></div>
 
                 <div className="wrapper">
-                    <input type="radio" name="select" id="option-1" checked  value="spotify" onClick = {playlistTypeChangeHandler}/>
+                    <input type="radio" name="select" id="option-1"   value="spotify" onClick = {playlistTypeChangeHandler}/>
                     <input type="radio" name="select" id="option-2" value="apple_music" onClick = {playlistTypeChangeHandler}/>
                     <label for="option-1" className="option option-1" >
                         <div className="dot"></div>
@@ -46,7 +59,7 @@ const Container = () => {
                 </div>
                 <div>
 
-                <Button variant="contained" color="success" onClick = {submitHandler}>Submit</Button>
+                <Button variant="contained" color="success" onClick = {submitHandler} disabled = {!submitPossible}>Submit</Button>
 
                 </div>
             </form>
