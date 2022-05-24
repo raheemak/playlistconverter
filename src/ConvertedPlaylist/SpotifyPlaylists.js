@@ -1,6 +1,7 @@
 
 import axios from "axios";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import PlaylistContext from "../store/PlaylistContext";
 
 
 const SpotifyPlaylists = () => {
@@ -9,6 +10,7 @@ const SpotifyPlaylists = () => {
     const [data, setData] = useState({});
     const [token, setToken] = useState("")
 
+    const playlistContext = useContext (PlaylistContext)
     useEffect(() => {
         if (localStorage.getItem("token")) {
             setToken(localStorage.getItem("token"));
@@ -28,11 +30,13 @@ const SpotifyPlaylists = () => {
             .catch((error) => {
                 console.log(error);
             });
+            console.log ("data items", data.items)
+            playlistContext.onUpdatePlaylists (data.items)
     };
 
     return (
         <>
-            <button onClick={handleGetPlaylists}>Get Playlists</button>
+            {handleGetPlaylists()}
             {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
         </>
     )
