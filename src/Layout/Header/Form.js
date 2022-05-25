@@ -3,6 +3,7 @@ import PlaylistContext from "../../store/PlaylistContext"
 import "./Form.css"
 import SpotifyLogin from "./SpotifyLogin";
 import CheckboxListSecondary from "./CurrentPlaylists";
+import AppleMusicLogin from "./AppleMusicLogin";
 const Container = () => {
 
     const [showErrorMessage, setShowErrorMessage] = useState(false)
@@ -68,7 +69,7 @@ const Container = () => {
                 </div>
 
                 <div>
-                    {showSpotifyLogin && <SpotifyLogin />}
+                    {showSpotifyLogin && <AppleMusicLogin />}
                 </div>
             </form>
            

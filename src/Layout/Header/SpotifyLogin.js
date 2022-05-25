@@ -23,7 +23,7 @@ const SpotifyLogin = () => {
         }
 
         setToken(token)
-        
+
     }, [])
 
     const logout = () => {
@@ -34,7 +34,7 @@ const SpotifyLogin = () => {
         if (localStorage.getItem("token")) {
             setToken(localStorage.getItem("token"));
         }
-        
+
         //TODO: temporary workaround for now ...
         handleGetPlaylists()
     }, [token]);
@@ -53,13 +53,13 @@ const SpotifyLogin = () => {
                 .catch((error) => {
                     console.log(error);
                 });
-            const formattedData = data.items.map ((item)=>{return {name: item.name, image:item.images[0].url}})
-            console.log ("printing formatted data")
-            console.log (formattedData)
+            const formattedData = data.items.map((item) => { return { name: item.name, image: item.images[0].url } })
+            console.log("printing formatted data")
+            console.log(formattedData)
             playlistContext.onUpdatePlaylists(formattedData)
         }, 100)
 
-        
+
     }
 
 
@@ -70,11 +70,11 @@ const SpotifyLogin = () => {
                     <a className="link" href={`${CONFIG.AUTH_ENDPOINT}?client_id=${CONFIG.CLIENT_ID}&redirect_uri=${CONFIG.REDIRECT_URI}&response_type=${CONFIG.RESPONSE_TYPE}`}>Login
                         to Spotify</a></Button>
                     : <div><Button variant="contained" color="success" onClick={logout}> Logout</Button>  <Button onClick={handleGetPlaylists}>Get Playlists</Button>  <div className="center">
-                    {playlistContext.playlists.length>0 && <CheckboxListSecondary/>}
-                </div>
-                        </div>}
+                        {playlistContext.playlists.length > 0 && <CheckboxListSecondary />}
+                    </div>
+                    </div>}
             </div>
-      
+
         </div>
     )
 }
